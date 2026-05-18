@@ -319,8 +319,8 @@ for 변수 in 범위:
     반복할 코드
 
 range() 사용법:
-range(끝)          → 0부터 끝-1까지
-range(시작, 끝)    → 시작부터 끝-1까지
+range(끝)             → 0부터 끝-1까지
+range(시작, 끝)       → 시작부터 끝-1까지
 range(시작, 끝, 스텝) → 스텝만큼 증가
 """
 
@@ -942,7 +942,6 @@ print(f'ages: {ages}')
 ages: {'박찬호': 49, '박지성': 40, '박세리': 50, '이승엽': 43, '박찌성': 50, '손흥민': 31}
 
 딕셔너리 순회:
-keys(), values(), items()를 사용한다.
 """
 
 print('\n=== 딕셔너리 순회 ===')
@@ -966,7 +965,280 @@ for key, value in ages.items():
 
 
 =================================================
-[5단계] random 모듈
+[5단계] 함수 (Function)
+=================================================
+
+함수(function) = module = 부품
+
+프로그래밍의 함수는 수학의 함수와 동일하게
+값을 넣어주면 특정 기능을 수행한 연산 결과를 출력한다.
+특정 기능이란 덧셈 같은 비교적 간단한 연산부터
+네트워크 연결, 회원 인증, 메일 발송과 같이 복잡하고 어려운 작업까지 모두 포함된다.
+
+파이썬에서는 함수가 핵심이다!
+
+함수의 종류:
+내장 함수 vs 사용자 함수
+
+내장 함수: 파이썬에 기본으로 제공되는 함수 (print, len, input 등)
+사용자 함수: 프로그래머가 직접 만드는 함수
+
+
+1. 함수 정의하기
+-------------------------------------------------
+사용자 함수를 만드는 것을 '함수를 정의한다'라고 한다.
+함수를 정의할 때 def 키워드를 사용한다.
+
+형태:
+def 함수명():
+    실행부 (함수 기능)
+
+함수명 규칙:
+1. 내장 함수명과 동일하면 안 된다.
+2. 첫 글자는 주로 소문자로 시작한다.
+3. 첫 글자로 숫자를 사용할 수 없다.
+   1greet() ← X
+   greet()  ← O
+   greet1() ← O
+4. 특수문자는 사용할 수 없지만 언더바(_)는 사용 가능하다.
+5. 두 개 이상의 단어가 조합되는 경우 스네이크 또는 카멜표기법을 사용한다.
+   sendMessage()      ← 카멜 표기법
+   send_message()     ← 스네이크 표기법
+   calculateDistance() ← 카멜 표기법
+   calculate_distance() ← 스네이크 표기법
+
+
+온도센서 작동 시스템:
+온도센서 작동을 시작하고 멈추는 함수를 정의한다.
+"""
+
+def startTemperatureSensor():
+    print('온도센서 작동을 시작합니다.')
+
+def stopTemperatureSensor():
+    print('온도센서 작동을 중지합니다.')
+
+"""
+2. 함수 호출
+-------------------------------------------------
+정의한 함수를 사용하려면 함수명()으로 호출한다.
+"""
+
+startTemperatureSensor()
+stopTemperatureSensor()
+
+"""
+출력 결과:
+온도센서 작동을 시작합니다.
+온도센서 작동을 중지합니다.
+
+
+3. 함수 내에서 다른 함수 호출
+-------------------------------------------------
+함수 안에서 다른 함수를 호출할 수 있다.
+"""
+
+def fun1():
+    print('fun1() CALLED!!')
+
+def fun2():
+    print('fun2() CALLED!!')
+
+def fun3():
+    fun1()
+    fun2()
+    print('fun3() CALLED!!')
+
+fun3()
+
+"""
+출력 결과:
+fun1() CALLED!!
+fun2() CALLED!!
+fun3() CALLED!!
+
+무한 재귀 주의:
+함수가 자기 자신을 계속 호출하면 무한 루프에 빠진다.
+
+def fun4():
+    print('fun4() CALLED!!')
+    fun4()          ← 자기 자신을 호출 → 무한 반복!
+
+fun4()를 호출하면 무한 반복된다! (호출하면 안 됨)
+
+
+4. global 변수
+-------------------------------------------------
+함수 밖에서 선언한 변수를 함수 안에서 수정하려면 global 키워드를 사용한다.
+global을 쓰지 않으면 함수 안에서만 사용하는 지역 변수로 인식된다.
+"""
+
+myCount = 0
+
+def increase():
+    global myCount
+    myCount += 1
+    print(f'myCount: {myCount}')
+
+increase()
+increase()
+increase()
+
+"""
+출력 결과:
+myCount: 1
+myCount: 2
+myCount: 3
+
+
+=================================================
+[실전 예제 - 함수]
+=================================================
+
+예제 1: 다국어 인사말 프로그램
+-------------------------------------------------
+출신 국가를 선택하면 해당하는 국가의 인사말이 출력되는 프로그램이다.
+"""
+
+print('\n=== 다국어 인사말 프로그램 ===')
+
+def introKor():
+    print('안녕하세요.')
+
+def introEng():
+    print('Hello')
+
+def introJap():
+    print('곤니찌와')
+
+selectedMenuNum = int(input('Where are you from? 1. 한국    2. USA   3. Japan: '))
+
+if selectedMenuNum == 1:
+    introKor()
+elif selectedMenuNum == 2:
+    introEng()
+elif selectedMenuNum == 3:
+    introJap()
+
+"""
+출력 결과 (예시, 1 입력 시):
+안녕하세요.
+
+
+예제 2: 계산기 프로그램
+-------------------------------------------------
+사용자가 숫자 2개를 입력하고 연산자를 선택하면 연산 결과가 출력되는 프로그램이다.
+"""
+
+print('\n=== 계산기 프로그램 ===')
+
+def add():
+    print(f'덧셈 결과: {inputNumber1 + inputNumber2}')
+
+def sub():
+    print(f'뺄셈 결과: {inputNumber1 - inputNumber2}')
+
+def mul():
+    print(f'곱셈 결과: {inputNumber1 * inputNumber2}')
+
+def div():
+    print(f'나눗셈 결과: {inputNumber1 / inputNumber2}')
+
+def calculator():
+    if selectedOperator == 1:
+        add()
+    elif selectedOperator == 2:
+        sub()
+    elif selectedOperator == 3:
+        mul()
+    elif selectedOperator == 4:
+        div()
+
+inputNumber1 = float(input('숫자를 입력하세요: '))
+selectedOperator = int(input('연산자를 선택하세요. 1. 덧셈  2. 뺄셈  3. 곱셈  4. 나눗셈: '))
+inputNumber2 = float(input('숫자를 입력하세요: '))
+
+calculator()
+
+"""
+출력 결과 (예시, 10, 1, 5 입력 시):
+덧셈 결과: 15.0
+
+
+예제 3: 과자 구매 프로그램
+-------------------------------------------------
+여러 종류의 과자를 구매하고 총 구매 금액을 계산하는 프로그램이다.
+global 변수를 사용하여 총 금액을 누적한다.
+"""
+
+print('\n=== 과자 구매 프로그램 ===')
+
+goods = {
+    '새우깡': 1200,
+    '비비빅': 400,
+    '초코파이': 500,
+    '맛동산': 1500
+}
+
+goodsTotalPrice = 0
+
+def shrimpCrackerPrice():
+    global goodsTotalPrice
+    goodsTotalPrice += goods['새우깡'] * shrimpCrackers
+    print(f'새우깡 구매 금액: {goods["새우깡"] * shrimpCrackers}원')
+
+def bibibigPrice():
+    global goodsTotalPrice
+    goodsTotalPrice += goods['비비빅'] * bibibigs
+    print(f'비비빅 구매 금액: {goods["비비빅"] * bibibigs}원')
+
+def chocopiePrice():
+    global goodsTotalPrice
+    goodsTotalPrice += goods['초코파이'] * chocopies
+    print(f'초코파이 구매 금액: {goods["초코파이"] * chocopies}원')
+
+def matdongsanPrice():
+    global goodsTotalPrice
+    goodsTotalPrice += goods['맛동산'] * matdongsans
+    print(f'맛동산 구매 금액: {goods["맛동산"] * matdongsans}원')
+
+shrimpCrackers = int(input('새우깡 구매 개수: '))
+bibibigs = int(input('비비빅 구매 개수: '))
+chocopies = int(input('초코파이 구매 개수: '))
+matdongsans = int(input('맛동산 구매 개수: '))
+
+print(f'새우깡 구매 개수: {shrimpCrackers}')
+print(f'비비빅 구매 개수: {bibibigs}')
+print(f'초코파이 구매 개수: {chocopies}')
+print(f'맛동산 구매 개수: {matdongsans}')
+
+print('=' * 40)
+
+shrimpCrackerPrice()
+bibibigPrice()
+chocopiePrice()
+matdongsanPrice()
+
+print('=' * 40)
+print(f'총 구매 금액: {goodsTotalPrice}원')
+
+"""
+출력 결과 (예시, 1, 2, 1, 1 입력 시):
+새우깡 구매 개수: 1
+비비빅 구매 개수: 2
+초코파이 구매 개수: 1
+맛동산 구매 개수: 1
+========================================
+새우깡 구매 금액: 1200원
+비비빅 구매 금액: 800원
+초코파이 구매 금액: 500원
+맛동산 구매 금액: 1500원
+========================================
+총 구매 금액: 4000원
+
+
+=================================================
+[6단계] random 모듈
 =================================================
 
 난수(무작위 숫자)를 생성한다.
@@ -1113,19 +1385,19 @@ print(f'짝수만: {evens}')
 
 print('\n=== 딕셔너리 활용 ===')
 
-scores = {
+subjectScores = {
     '수학': 90,
     '영어': 85,
     '과학': 95
 }
 
-total = 0
-for subject, score in scores.items():
+subjectTotal = 0
+for subject, score in subjectScores.items():
     print(f'{subject}: {score}점')
-    total += score
+    subjectTotal += score
 
-average = total / len(scores)
-print(f'평균: {average}점')
+subjectAverage = subjectTotal / len(subjectScores)
+print(f'평균: {subjectAverage}점')
 
 """
 출력 결과:
@@ -1136,7 +1408,7 @@ print(f'평균: {average}점')
 
 
 =================================================
-[실전 예제]
+[실전 예제 - 종합]
 =================================================
 
 예제 1: 출석부 관리 시스템
@@ -1203,7 +1475,7 @@ LOOP_COUNT = 10
 bloods = []
 
 for i in range(LOOP_COUNT):
-    print(f'헌혈해 주셔서 감사합니다. 혈액형을 선택하세요. (A, B, AB, O)')
+    print('헌혈해 주셔서 감사합니다. 혈액형을 선택하세요. (A, B, AB, O)')
     bloods.append(input())
 
 print(f'bloods: {bloods}')
@@ -1311,17 +1583,9 @@ data[1:4] = [1, 2, 3]
 6. 딕셔너리 키 오류
 -------------------------------------------------
 존재하지 않는 키로 접근하면 오류가 발생한다.
-"""
 
+예시:
 student = {'name': 'Alice', 'age': 25}
-
-print(f'이름: {student["name"]}')
-
-"""
-출력 결과:
-이름: Alice
-
-주의:
 student['grade']  ← 'grade' 키가 없으면 오류 발생!
 
 
@@ -1350,13 +1614,47 @@ print(f'수정 후: {colors}')
 같은 키로 값을 다시 할당하면 기존 값이 덮어씌워진다.
 """
 
-ages = {'박찬호': 48, '박찬호': 49}
-print(f'ages: {ages}')
+dupAges = {'박찬호': 48, '박찬호': 49}
+print(f'dupAges: {dupAges}')
 
 """
 출력 결과:
-ages: {'박찬호': 49}
+dupAges: {'박찬호': 49}
 ← 나중에 할당한 값으로 덮어씌워진다
+
+
+9. 함수는 정의 후 호출
+-------------------------------------------------
+함수는 반드시 정의한 후에 호출해야 한다.
+정의하기 전에 호출하면 오류가 발생한다.
+
+예시:
+greetUser()       ← 오류! 함수가 아직 정의되지 않음
+
+def greetUser():
+    print('안녕하세요')
+
+greetUser()       ← 정상 작동
+
+
+10. global 변수 사용 주의
+-------------------------------------------------
+함수 안에서 전역 변수를 수정하려면 global 키워드를 사용해야 한다.
+global을 쓰지 않으면 지역 변수로 인식된다.
+"""
+
+globalCount = 0
+
+def increaseCount():
+    global globalCount
+    globalCount += 1
+
+increaseCount()
+print(f'globalCount: {globalCount}')
+
+"""
+출력 결과:
+globalCount: 1
 
 
 =================================================
@@ -1367,9 +1665,10 @@ ages: {'박찬호': 49}
 2단계: 조건문
 3단계: 루프
 4단계: 리스트, 튜플, 딕셔너리
-5단계: random 모듈
-6단계: 핵심 패턴
-7단계: 실전 예제
+5단계: 함수
+6단계: random 모듈
+7단계: 핵심 패턴
+8단계: 실전 예제
 
 =================================================
 [최종 체크리스트]
@@ -1387,6 +1686,10 @@ ages: {'박찬호': 49}
 ✓ 딕셔너리의 키-값 구조를 이해했는가?
 ✓ 딕셔너리를 순회할 수 있는가?
 ✓ 슬라이싱을 이해했는가?
+✓ 함수를 정의하고 호출할 수 있는가?
+✓ 함수명 규칙을 이해했는가?
+✓ 함수 안에서 다른 함수를 호출할 수 있는가?
+✓ global 변수를 사용할 수 있는가?
 ✓ random 모듈(randint, randrange, choice, shuffle)을 사용할 수 있는가?
 ✓ count() 함수로 아이템 개수를 셀 수 있는가?
 ✓ 기본 패턴을 활용할 수 있는가?
@@ -1394,5 +1697,3 @@ ages: {'박찬호': 49}
 
 모두 체크되었다면 파이썬 기초는 충분히 이해한 것입니다!
 """
-
-print('\n✓ 파이썬 기초 완전 학습 완료!')

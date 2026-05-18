@@ -1,3 +1,4 @@
+'''
 goods = {
     '새우깡': 1200,
     '비비빅': 400,
@@ -46,6 +47,18 @@ matdongsanPrice()
 
 print('=' * 40)
 print(f'총 구매 금액: {totalPrice}원')
+'''
 
 
+student = {
+    '이름': '홍길동',
+    '나이': 25
+}
 
+print(f'나이: {student}')
+
+def modifyStudentAge():
+    student['나이'] += 1
+
+modifyStudentAge()
+print(f'나이: {student['나이']}')

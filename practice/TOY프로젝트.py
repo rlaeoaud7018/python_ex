@@ -460,3 +460,7 @@ while flag:
     elif userSelectedMenuNum == SYSTEM_SHUTDOWN:    # 99.종료
         flag = False
         print('Good bye~')
+
+
+
+

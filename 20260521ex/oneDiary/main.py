@@ -8,6 +8,8 @@ oneDiary
 
 from config_dir import config
 from member import session
+from db import member_db
+
 
 flag = True
 
@@ -29,8 +31,24 @@ while flag:
         uMail = print('please input new member MAIL: ')
         uPhone = print('please input new member PHONE: ')
 
+        member_db.memberDB = {
+            'uId': uId,
+            'uPw': uPw,
+            'uMail': uMail,
+            'uPhone': uPhone
+            }
+
+        print('New member sign-up success!')
+
+        if config.DEV_MOD:
+            print(f'memberDB: {member_db.memberDB}')
+
     elif menuNum == config.SIGN_IN:
         print('2.sign-in')
+        uId = print('please input member ID: ')
+        uPw = print('please input member PW: ')
+
+
     elif menuNum == config.MEMBER_MODIFY:
         print('3.modify')
     elif menuNum == config.MEMBER_DELETE:

@@ -31,7 +31,14 @@ sortedNumbers = sortNumbers(gamer1Dice.getSum(),
                             gamer3Dice.getSum())
 
 print('========================')
-print(f'1등 : {sortedNumbers[0]}     WIN!!')
-print(f'2등 : {sortedNumbers[1]} ')
-print(f'3등 : {sortedNumbers[2]} ')
+
+for idx, item in enumerate(sortedNumbers):
+    if idx == 0:
+        print(f'{idx + 1}등 : {item}    WIN!')
+    else:
+        print(f'{idx + 1}등 : {item}')
+
+# print(f'1등 : {sortedNumbers[0]}     WIN!!')
+# print(f'2등 : {sortedNumbers[1]} ')
+# print(f'3등 : {sortedNumbers[2]} ')
 print('========================')
